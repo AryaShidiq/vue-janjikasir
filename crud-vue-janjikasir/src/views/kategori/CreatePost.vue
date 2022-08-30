@@ -50,7 +50,7 @@ export default {
         function store() {
 
             let kategori   = post.kategori
-            axios.post('http://localhost:8000/api/kategori', {
+            axios.post('http://127.0.0.1:8000/api/kategori', {
                 kategori: kategori,
             }).then(() => {
 

@@ -1,4 +1,6 @@
 <template>
+<Navbar/>
+
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">
@@ -13,8 +15,7 @@
                                 <tr>
                                     <th scope="col">Id</th>
                                     <th scope="col">Nama Makanan</th>
-                                    <th scope="col">Foto</th>
-                                    <th scope="col">Foto Dummy</th>
+                                    <!-- <th scope="col">Foto</th> -->
                                     <th scope="col">Kategori</th>
                                     <th scope="col">Harga</th>
                                     <th scope="col">Stock</th>
@@ -25,16 +26,16 @@
                                 <tr v-for="(menu, index) in menus" :key="index">
                                     <td>{{ menu.id }}</td>
                                     <td>{{ menu.namamenu }}</td>
-                                    <td>{{ menu.foto }}</td>
-                                    <td>
+                                    <!-- <td>{{ menu.foto }}</td> -->
+                                    <!-- <td>
                                         <img v-bind:src="menu.foto" alt="">
-                                    </td>
+                                    </td> -->
                                     <td>{{ menu.kategori_id }}</td>
                                     <td>{{ menu.harga }}</td>
                                     <td>{{ menu.stock }}</td>
                                     <td class="text-center">
                                         <router-link :to="{name: 'menu.edit', params:{id: menu.id }}" class="btn btn-sm btn-primary mr-1">EDIT</router-link>
-                                        <button class="btn btn-sm btn-danger ml-1">DELETE</button>
+                                        <button @click.prevent="menuDelete(menus.id)" class="btn btn-sm btn-danger ml-1">DELETE</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -50,37 +51,41 @@
 <script>
 import axios from 'axios'
 import { onMounted, ref } from 'vue'
+import Navbar from '@/components/Navbar.vue'
 
 export default {
-
     setup() {
-
         //reactive state
-        let menus = ref([])
-
+        let menus = ref([]);
         //mounted
         onMounted(() => {
-
             //get API from Laravel Backend
-            axios.get('http://localhost:8000/api/menu')
-            .then(response => {
-              
-              //assign state menus with response data
-              menus.value = response.data.data
-
+            axios.get("http://localhost:8000/api/menu")
+                .then(response => {
+                //assign state menus with response data
+                menus.value = response.data.data;
             }).catch(error => {
-                console.log(error.response.data)
-            })
+                console.log(error.response.data);
+            });
+        });
 
-        })
-
+        function menuDelete(id) {
+            //delete data post by ID
+            axios.delete(`http://127.0.0.1:8000/api/menu/${id}`)
+                .then(() => {
+                //splice posts 
+                menus.value.splice(menus.value.indexOf(id), 1);
+            }).catch(error => {
+                console.log(error.response.data);
+            });
+        }
         //return
         return {
-            menus
-        }
-
-    }
-
+            menus,
+            menuDelete
+        };
+    },
+    components: { Navbar }
 }
 </script>
 
