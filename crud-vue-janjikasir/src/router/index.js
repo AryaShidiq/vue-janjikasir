@@ -24,12 +24,12 @@ const routes = [
         component: () => import( /* webpackChunkName: "menu.index" */ '@/views/menu/IndexMenu.vue')
     },
     {
-        path: '/create',
+        path: '/menucreate',
         name: 'menu.create',
         component: () => import( /* webpackChunkName: "menu.create" */ '@/views/menu/CreateMenu.vue')
     },
     {
-        path: '/edit/:id',
+        path: '/menuedit/:id',
         name: 'menu.edit',
         component: () => import( /* webpackChunkName: "menu.edit" */ '@/views/menu/EditMenu.vue')
     }
