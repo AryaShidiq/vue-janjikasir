@@ -1,4 +1,5 @@
 <template>
+    <Navbar/>
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">
@@ -39,52 +40,40 @@
 <script>
 import axios from 'axios'
 import { onMounted, ref } from 'vue'
+import Navbar from '@/components/Navbar.vue'
 
 export default {
-
     setup() {
-
         //reactive state
-        let kategoris = ref([])
-
+        let kategoris = ref([]);
         //mounted
         onMounted(() => {
-
             //get API from Laravel Backend
-            axios.get('http://127.0.0.1:8000/api/kategori')
-            .then(response => {
-              
-              //assign state posts with response data
-              kategoris.value = response.data.data
-
+            axios.get("http://127.0.0.1:8000/api/kategori")
+                .then(response => {
+                //assign state posts with response data
+                kategoris.value = response.data.data;
             }).catch(error => {
-                console.log(error.response.data)
-            })
-
-        })
+                console.log(error.response.data);
+            });
+        });
         function kategoriDelete(id) {
-            
             //delete data post by ID
-            axios.delete(`http://localhost:8000/api/kategori/${id}`)
-            .then(() => {
-                       
+            axios.delete(`http://127.0.0.1:8000/api/kategori/${id}`)
+                .then(() => {
                 //splice posts 
                 kategoris.value.splice(kategoris.value.indexOf(id), 1);
-         
-             }).catch(error => {
-                 console.log(error.response.data)
-             })
-         
-         }
-        
+            }).catch(error => {
+                console.log(error.response.data);
+            });
+        }
         //return
         return {
             kategoris,
             kategoriDelete
-        }
-
-    }
-
+        };
+    },
+    components: { Navbar }
 }
 </script>
 
