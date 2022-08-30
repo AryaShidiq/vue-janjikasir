@@ -35,12 +35,11 @@
                                     <td>{{ menu.stock }}</td>
                                     <td class="text-center">
                                         <router-link :to="{name: 'menu.edit', params:{id: menu.id }}" class="btn btn-sm btn-primary mr-1">EDIT</router-link>
-                                        <button @click.prevent="menuDelete(menus.id)" class="btn btn-sm btn-danger ml-1">DELETE</button>
+                                        <button @click.prevent="menuDelete(menu.id)" class="btn btn-sm btn-danger ml-1">DELETE</button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>

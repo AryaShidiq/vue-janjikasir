@@ -75,7 +75,7 @@
             //state posts
             const post = reactive({
                 namamenu: '',
-                kategori: '',
+                kategori_id: '',
                 harga: '',
                 stock: '',
             })
@@ -93,11 +93,14 @@
             onMounted(() => {
 
                 //get API from Laravel Backend
-                axios.get(`http://127.0.0.1:8000/api/kategori/${route.params.id}`)
+                axios.get(`http://127.0.0.1:8000/api/menu/${route.params.id}`)
                     .then(response => {
 
                         //assign state posts with response data
-                        post.menu = response.data.data.menu
+                        post.namamenu = response.data.data.namamenu
+                        post.kategori_id = response.data.data.kategori_id
+                        post.harga = response.data.data.harga
+                        post.stock = response.data.data.stock
 
                     }).catch(error => {
                         console.log(error.response.data)
@@ -112,7 +115,7 @@
                 let kategori_id = post.kategori_id
                 let harga = post.harga
                 let stock = post.stock
-                axios.put(`http://127.0.0.1:8000/api/kategori/${route.params.id}`, {
+                axios.put(`http://127.0.0.1:8000/api/menu/${route.params.id}`, {
                     namamenu: namamenu,
                     kategori_id: kategori_id,
                     harga: harga,
