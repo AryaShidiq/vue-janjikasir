@@ -23,7 +23,7 @@
                                     <!-- <td>{{ post.content }}</td> -->
                                     <td class="text-center">
                                         <router-link :to="{name: 'kategori.edit', params:{id: kategori.id }}" class="btn btn-sm btn-primary mr-1">EDIT</router-link>
-                                        <button @click.prevent="kategoriDelete(kategori.id)" class="btn btn-sm btn-danger ml-1">DELETE</button>
+                                        <button class="btn btn-sm btn-danger ml-1">DELETE</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -51,7 +51,7 @@ export default {
         onMounted(() => {
 
             //get API from Laravel Backend
-            axios.get('http://127.0.0.1:8000/api/kategori')
+            axios.get('http://127.0.0.1:8000/api/kategoris')
             .then(response => {
               
               //assign state posts with response data
@@ -62,25 +62,10 @@ export default {
             })
 
         })
-        function kategoriDelete(id) {
-            
-            //delete data post by ID
-            axios.delete(`http://localhost:8000/api/kategori/${id}`)
-            .then(() => {
-                       
-                //splice posts 
-                kategoris.value.splice(kategoris.value.indexOf(id), 1);
-         
-             }).catch(error => {
-                 console.log(error.response.data)
-             })
-         
-         }
-        
+
         //return
         return {
-            kategoris,
-            kategoriDelete
+            kategoris
         }
 
     }

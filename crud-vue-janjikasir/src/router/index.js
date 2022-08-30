@@ -17,6 +17,21 @@ const routes = [
         path: '/edit/:id',
         name: 'kategori.edit',
         component: () => import( /* webpackChunkName: "kategori.edit" */ '@/views/kategori/EditPost.vue')
+    },
+    {
+        path: '/menu',
+        name: 'menu.index',
+        component: () => import( /* webpackChunkName: "menu.index" */ '@/views/menu/IndexMenu.vue')
+    },
+    {
+        path: '/create',
+        name: 'menu.create',
+        component: () => import( /* webpackChunkName: "menu.create" */ '@/views/menu/CreateMenu.vue')
+    },
+    {
+        path: '/edit/:id',
+        name: 'menu.edit',
+        component: () => import( /* webpackChunkName: "menu.edit" */ '@/views/menu/EditMenu.vue')
     }
 ]
 
